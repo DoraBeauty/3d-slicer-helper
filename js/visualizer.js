@@ -201,6 +201,20 @@
       infillG.innerHTML = infHtml;
       markersG.innerHTML = mkHtml;
 
+      var xyNozzleG = document.getElementById('xy-nozzle');
+      if (xyNozzleG) {
+        var cx = ix + iw / 2;
+        var cy = iy + ih / 2;
+        xyNozzleG.innerHTML =
+          '<g>' +
+          '<animateTransform attributeName="transform" type="translate" values="-45,-15; 45,15; -45,-15" dur="2.4s" repeatCount="indefinite" />' +
+          '<rect x="' + (cx - 10) + '" y="' + (cy - 12) + '" width="20" height="24" rx="4" fill="#334155" />' +
+          '<circle cx="' + cx + '" cy="' + cy + '" r="6" fill="#f59e0b" stroke="#ffffff" stroke-width="1.5" />' +
+          '<circle cx="' + cx + '" cy="' + cy + '" r="2" fill="#78350f" />' +
+          '<text x="' + (cx + 14) + '" y="' + (cy + 4) + '" font-size="11.5" fill="#1e40af" font-weight="bold" filter="drop-shadow(1px 1px 2px #fff)">⬅ 噴嘴 (動畫示意)</text>' +
+          '</g>';
+      }
+
       if (diag.isCrossCollision) {
         badge.style.color = '#dc2626';
         badge.textContent = '🚨 紅點同層相撞刮噴嘴！';
@@ -258,9 +272,15 @@
       // 1. 繪製上方移動噴嘴
       var nozzleX = diag.isRoofSagging ? 180 : 248;
       nozzleG.innerHTML =
-        '<rect x="' + (nozzleX - 13) + '" y="6" width="26" height="12" rx="3" fill="#334155" />' +
-        '<polygon points="' + (nozzleX - 9) + ',18 ' + (nozzleX + 9) + ',18 ' + (nozzleX + 3) + ',28 ' + (nozzleX - 3) + ',28" fill="#f59e0b" />' +
-        '<text x="' + (nozzleX + 18) + '" y="16" font-size="10.5" fill="#475569" font-weight="bold">⬅ 噴嘴鋪屋頂</text>';
+        '<g>' +
+        '<animateTransform attributeName="transform" type="translate" values="' + (nozzleX - 45) + ',0; ' + (nozzleX + 25) + ',0; ' + (nozzleX - 45) + ',0" dur="2.5s" repeatCount="indefinite" />' +
+        '<rect x="-13" y="6" width="26" height="12" rx="3" fill="#334155" />' +
+        '<polygon points="-9,18 9,18 3,28 -3,28" fill="#f59e0b" />' +
+        '<line x1="0" y1="28" x2="0" y2="52" stroke="#3b82f6" stroke-width="3" stroke-dasharray="6,3">' +
+          '<animate attributeName="stroke-dashoffset" values="9;0" dur="0.25s" repeatCount="indefinite" />' +
+        '</line>' +
+        '<text x="18" y="16" font-size="11" fill="#1e40af" font-weight="bold">⬅ 噴嘴鋪屋頂 (動畫示意)</text>' +
+        '</g>';
 
       // 2. 繪製底部實心層 (y=190~202) 與左右垂直橘色外牆 (y=52~202)
       var wHtml = '';
