@@ -1,0 +1,756 @@
+    /* 頂部新手友善歡迎卡片 */
+    .hero-card {
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-top: 6px solid #16a34a;
+      border-radius: 16px;
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: #16a34a;
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 99px;
+      letter-spacing: 0.5px;
+    }
+
+    h1 {
+      margin: 6px 0 2px 0;
+      font-size: 21px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .hero-sub {
+      margin: 0;
+      font-size: 13.5px;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .beginner-tip-bar {
+      margin-top: 10px;
+      background: #f0fdf4;
+      border: 1.5px solid #86efac;
+      border-radius: 12px;
+      padding: 9px 13px;
+      font-size: 13px;
+      color: #14532d;
+    }
+
+    /* 頂部實戰體驗快捷列 (3 慘劇 + 1 完美修復) */
+    .quick-demo-bar {
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 11px 13px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+    }
+
+    .quick-demo-title {
+      font-size: 12.5px;
+      font-weight: 900;
+      color: #334155;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .quick-demo-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    @media (min-width: 680px) {
+      .quick-demo-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .quick-demo-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .demo-pill-btn {
+      appearance: none;
+      border-radius: 10px;
+      padding: 9px 10px;
+      font-size: 12.5px;
+      font-weight: 900;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.14s ease;
+      line-height: 1.35;
+    }
+
+    .demo-pill-danger {
+      background: #fef2f2;
+      border: 2px solid #fca5a5;
+      color: #991b1b;
+    }
+
+    .demo-pill-danger:hover {
+      background: #fee2e2;
+      border-color: #ef4444;
+    }
+
+    .demo-pill-danger.active {
+      background: #dc2626;
+      border-color: #991b1b;
+      color: #ffffff;
+      box-shadow: 0 3px 10px rgba(220, 38, 38, 0.25);
+    }
+
+    .demo-pill-fix {
+      background: #ecfdf5;
+      border: 2px solid #6ee7b7;
+      color: #065f46;
+    }
+
+    .demo-pill-fix:hover {
+      background: #d1fae5;
+      border-color: #10b981;
+    }
+
+    .demo-pill-fix.active {
+      background: #16a34a;
+      border-color: #15803d;
+      color: #ffffff;
+    }
+
+    /* 頂部雙模式切換大按鈕 (Tab A 懶人選物 / Tab B 白話問答) */
+    .mode-tabs {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    @media (min-width: 640px) {
+      .mode-tabs {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .mode-tab-btn {
+      appearance: none;
+      background: #ffffff;
+      border: 2.5px solid #cbd5e1;
+      border-radius: 14px;
+      padding: 12px 14px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.04);
+    }
+
+    .mode-tab-btn:hover {
+      border-color: #94a3b8;
+    }
+
+    .mode-tab-btn.active {
+      background: #ecfdf5;
+      border-color: #16a34a;
+      box-shadow: 0 4px 14px rgba(22, 163, 74, 0.18);
+    }
+
+    .mode-tab-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+
+    .mode-tab-title {
+      font-size: 15px;
+      font-weight: 900;
+      color: #0f172a;
+      display: block;
+    }
+
+    .mode-tab-desc {
+      font-size: 12px;
+      color: #475569;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Tab A: 日常物品直覺網格 */
+    .item-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (min-width: 768px) {
+      .item-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .item-card-btn {
+      appearance: none;
+      background: #f8fafc;
+      border: 2.5px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 12px 12px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .item-card-btn:hover {
+      border-color: #94a3b8;
+      background: #ffffff;
+    }
+
+    .item-card-btn:active {
+      transform: scale(0.98);
+    }
+
+    .item-card-btn.active {
+      background: #ecfdf5;
+      border-color: #16a34a;
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.18);
+    }
+
+    .item-top-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .item-emoji {
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .item-name {
+      font-size: 14.5px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .item-example {
+      font-size: 12px;
+      color: #475569;
+      line-height: 1.35;
+    }
+
+    .item-pill {
+      display: inline-block;
+      align-self: flex-start;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      color: #334155;
+      margin-top: 2px;
+    }
+
+    .item-card-btn.active .item-pill {
+      background: #16a34a;
+      color: #ffffff;
+    }
+
+    /* Tab B: 4 句大白話問答區 */
+    .qa-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .qa-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .qa-box {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    .qa-step-title {
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+      margin: 0 0 8px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .qa-step-badge {
+      background: #0284c7;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 99px;
+    }
+
+    .qa-options-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .qa-options-1 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 7px;
+    }
+
+    .qa-btn {
+      appearance: none;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 9px 10px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.12s ease;
+    }
+
+    .qa-btn.active {
+      background: #e0f2fe;
+      border-color: #0284c7;
+      box-shadow: 0 2px 8px rgba(2, 132, 199, 0.16);
+    }
+
+    .qa-btn-title {
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+      display: block;
+    }
+
+    .qa-btn-sub {
+      font-size: 11px;
+      color: #475569;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* SECTION 2: 電腦切片軟體 1:1 傻瓜照抄面板 */
+    .cheat-sheet-card {
+      background: #ffffff;
+      border: 3px solid #16a34a;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(22, 163, 74, 0.12);
+    }
+
+    .cheat-header {
+      background: #16a34a;
+      color: #ffffff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cheat-header-title {
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .copy-btn {
+      appearance: none;
+      background: #ffffff;
+      color: #15803d;
+      border: none;
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: 12.5px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.97);
+    }
+
+    .slicer-path-banner {
+      background: #f0fdf4;
+      border-bottom: 1.5px solid #bbf7d0;
+      padding: 9px 14px;
+      font-size: 12.5px;
+      font-weight: 800;
+      color: #166534;
+    }
+
+    .cheat-body {
+      padding: 14px 16px;
+    }
+
+    /* 推薦購買線材橫幅 */
+    .filament-recommend-box {
+      background: #f8fafc;
+      border: 2px solid #94a3b8;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filament-badge {
+      font-size: 13.5px;
+      font-weight: 900;
+      padding: 5px 10px;
+      border-radius: 8px;
+    }
+
+    .fil-pla {
+      background: #dcfce7;
+      color: #15803d;
+      border: 1.5px solid #86efac;
+    }
+
+    .fil-petg {
+      background: #ffedd5;
+      color: #c2410c;
+      border: 1.5px solid #fdba74;
+    }
+
+    .fil-tpu {
+      background: #f3e8ff;
+      color: #7e22ce;
+      border: 1.5px solid #d8b4fe;
+    }
+
+    /* 4 個切片軟體照抄格子 */
+    .slicer-row {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+
+    .slicer-row-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .slicer-software-label {
+      font-size: 14px;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .slicer-input-mock {
+      font-size: 15px;
+      font-weight: 900;
+      padding: 5px 12px;
+      border-radius: 8px;
+      background: #0f172a;
+      color: #ffffff;
+      white-space: nowrap;
+      border: 2px solid #334155;
+    }
+
+    .slicer-input-mock.highlight-orange {
+      background: #ea580c;
+      border-color: #c2410c;
+    }
+
+    .slicer-input-mock.highlight-blue {
+      background: #0284c7;
+      border-color: #0369a1;
+    }
+
+    .slicer-input-mock.highlight-green {
+      background: #16a34a;
+      border-color: #15803d;
+    }
+
+    .plain-talk-explain {
+      font-size: 12px;
+      color: #334155;
+      background: #ffffff;
+      border-left: 3.5px solid #94a3b8;
+      padding: 5px 8px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    /* 即時白話文防翻車雷達 */
+    .radar-alert {
+      border-radius: 12px;
+      padding: 11px 13px;
+      font-size: 12.5px;
+      margin-top: 10px;
+      line-height: 1.5;
+    }
+
+    .radar-ok {
+      background: #f0fdf4;
+      border: 2px solid #22c55e;
+      color: #14532d;
+    }
+
+    .radar-danger {
+      background: #fef2f2;
+      border: 2.5px solid #ef4444;
+      color: #991b1b;
+    }
+
+    .radar-warn {
+      background: #fffbeb;
+      border: 2.5px solid #f59e0b;
+      color: #92400e;
+    }
+
+    /* 折疊箱專屬「底板＋側板分開設」白話教學盒 */
+    .combo-secret-box {
+      background: #eff6ff;
+      border: 2px solid #3b82f6;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+
+    .combo-secret-title {
+      font-size: 13px;
+      font-weight: 900;
+      color: #1e3a8a;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .combo-step {
+      background: #ffffff;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      padding: 7px 10px;
+      font-size: 12px;
+      color: #1e3a8a;
+      margin-bottom: 5px;
+    }
+
+    /* SECTION 3: 透視物理圖解區 */
+    .xray-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .xray-box {
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .xray-header {
+      background: #e2e8f0;
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 900;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .xray-svg-wrap {
+      background: #ffffff;
+      padding: 8px;
+    }
+
+    svg.cartoon-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+
+    .layer-flip-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #eff6ff;
+      border-top: 1px solid #bfdbfe;
+      padding: 8px 10px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .layer-flip-btn {
+      appearance: none;
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .layer-flip-btn:active {
+      transform: scale(0.97);
+    }
+
+    .xray-legend-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 6px 12px;
+      background: #f8fafc;
+      border-top: 1px solid #e2e8f0;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #334155;
+    }
+
+    .legend-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 4px;
+      vertical-align: middle;
+    }
+
+    .xray-caption {
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #334155;
+      background: #f1f5f9;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    /* SECTION 4: 手動微調實驗室 */
+    .sandbox-controls {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      background: #f8fafc;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 12px;
+      padding: 12px;
+    }
+
+    @media (min-width: 768px) {
+      .sandbox-controls {
+        grid-template-columns: 1.25fr 1fr;
+      }
+    }
+
+    .pattern-pill-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+
+    @media (min-width: 480px) {
+      .pattern-pill-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .pat-pill {
+      appearance: none;
+      background: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 7px 6px;
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #1e293b;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .pat-pill.pat-bad {
+      background: #fffbeb;
+      border-style: dashed;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+
+    .pat-pill.active {
+      background: #16a34a;
+      border-style: solid;
+      border-color: #15803d;
+      color: #ffffff;
+    }
+
+    .slider-group {
+      margin-bottom: 10px;
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12.5px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    .slider-flex {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pm-btn {
+      appearance: none;
+      width: 34px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1.5px solid #94a3b8;
+      background: #ffffff;
+      font-weight: 900;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      height: 24px;
+      accent-color: #16a34a;
+      cursor: pointer;
+    }
+

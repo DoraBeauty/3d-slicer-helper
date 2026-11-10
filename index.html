@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>3D 列印新手傻瓜調參神器 | Slicer Parameter Pro</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <div class="app-wrap">
+
+    <!-- 頂部新手歡迎區 -->
+    <header class="hero-card" id="sec-choose">
+      <div>
+        <span class="hero-badge">🐣 零基礎新手專用・買機器前先存起來</span>
+        <h1>3D 列印新手傻瓜調參神器 | Slicer Parameter Pro</h1>
+        <p class="hero-sub">不用背任何工程名詞！直接點「你想印的東西」，1 秒配好塑膠線材與電腦切片格子，並透視內部支撐與屋頂結構。</p>
+      </div>
+      <div class="beginner-tip-bar">
+        💡 <strong>核心黃金口訣：</strong> ① 想讓零件堅固耐扳，<strong>加厚「外皮牆圈數 (2圈改3~4圈)」</strong>比把肚子填充拉到 40% 有效十倍！ ② 肚子裡的填充支架主要是用來<strong>從下方托住屋頂不塌陷</strong>。
+      </div>
+    </header>
+
+    <!-- 頂部 3 大實戰翻車體驗 & 1 鍵修復快捷列 -->
+    <section class="quick-demo-bar" aria-label="實戰翻車體驗與修復快捷列">
+      <div class="quick-demo-title">
+        <span>⚡ <strong>一鍵透視新手 3 大翻車慘劇（點選立即看右方「屋頂與支撐側面圖」變化）：</strong></span>
+        <span style="color:#64748b;font-size:11.5px;">工程實驗室實測避坑案例</span>
+      </div>
+      <div class="quick-demo-grid">
+        <button type="button" class="demo-pill-btn demo-pill-danger" id="trap-btn-1" onclick="triggerTrap(1)">
+          💥 慘劇1：平底盒用 5% 螺旋體<br/>
+          <span style="font-size:11px;font-weight:700;opacity:0.9;">👉 支撐綠點隔太遠，屋頂踩空下垂凹洞</span>
+        </button>
+        <button type="button" class="demo-pill-btn demo-pill-danger" id="trap-btn-2" onclick="triggerTrap(2)">
+          💥 慘劇2：PETG 用網格 (Grid)<br/>
+          <span style="font-size:11px;font-weight:700;opacity:0.9;">👉 同層紅點十字相撞，結瘤刮噴嘴異音</span>
+        </button>
+        <button type="button" class="demo-pill-btn demo-pill-danger" id="trap-btn-3" onclick="triggerTrap(3)">
+          💥 慘劇3：填充狂拉 40% 卻只設 2 圈牆<br/>
+          <span style="font-size:11px;font-weight:700;opacity:0.9;">👉 耗時耗料翻倍，外皮太薄照樣折斷</span>
+        </button>
+        <button type="button" class="demo-pill-btn demo-pill-fix active" id="trap-btn-fix" onclick="restoreRecommended()">
+          ✅ 完美修復：一鍵恢復最佳建議參數<br/>
+          <span style="font-size:11px;font-weight:700;opacity:0.9;">👉 綠點密集托住屋頂＋零交叉不刮噴頭</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- SECTION 1: 兩種超直覺選法切換 Tabs -->
+    <div class="mode-tabs">
+      <button type="button" id="tab-btn-items" class="mode-tab-btn active" onclick="switchMode('items')">
+        <span class="mode-tab-icon">🎯</span>
+        <div>
+          <span class="mode-tab-title">模式 A：懶人一鍵選物品（最推薦新手！）</span>
+          <span class="mode-tab-desc">直接點選日常最常印的 6 大類物品，1 秒自動給出最佳配方</span>
+        </div>
+      </button>
+      <button type="button" id="tab-btn-qa" class="mode-tab-btn" onclick="switchMode('qa')">
+        <span class="mode-tab-icon">🧭</span>
+        <div>
+          <span class="mode-tab-title">模式 B：4 句大白話問答（印特殊自訂零件）</span>
+          <span class="mode-tab-desc">回答用途、屋頂形狀、大小、使用環境，自動推算專屬參數</span>
+        </div>
+      </button>
+    </div>
+
+    <!-- 模式 A：6 種日常物品一鍵選 -->
+    <section class="card" id="panel-items">
+      <h2 class="section-title">👇 點選你腦中想印的東西（點一下立即看下方照抄單與透視圖）：</h2>
+      <p class="section-subtitle">系統已根據「抗彎力學、頂面搭橋跨距、噴嘴防刮特性」幫你配好最佳參數！</p>
+
+      <div class="item-grid">
+        <button type="button" class="item-card-btn" data-item="statue_large" onclick="selectEverydayItem('statue_large')">
+          <div>
+            <div class="item-top-row">
+              <span class="item-emoji">🗿</span>
+              <span class="item-name">大型公仔 / 擺飾</span>
+            </div>
+            <div class="item-example">動漫模型、雕像擺件（中心大空腔省料、貼屋頂處自動分叉加密）</div>
+          </div>
+          <span class="item-pill">PLA・自適應立方體 8%・牆2圈</span>
+        </button>
+
+        <button type="button" class="item-card-btn active" data-item="desk_box" onclick="selectEverydayItem('desk_box')">
+          <div>
+            <div class="item-top-row">
+              <span class="item-emoji">🍱</span>
+              <span class="item-name">桌面收納盒 / 平底盤</span>
+            </div>
+            <div class="item-example">抽屜分類盒、筆筒、托盤（有大面積平坦盒底，最怕踩空凹陷）</div>
+          </div>
+          <span class="item-pill">PLA・網格 10%・牆2圈・頂層5層</span>
+        </button>
+
+        <button type="button" class="item-card-btn" data-item="folding_box" onclick="selectEverydayItem('folding_box')">
+          <div>
+            <div class="item-top-row">
+              <span class="item-emoji">🧺</span>
+              <span class="item-name">折疊收納箱 (底板+側板)</span>
+            </div>
+            <div class="item-example">底板要平整防塌陷＋四周側板要反覆折彎開合（附分件設定教學）</div>
+          </div>
+          <span class="item-pill">PLA・底板網格＋側板螺旋體 12%</span>
+        </button>
+
+        <button type="button" class="item-card-btn" data-item="clip_flex" onclick="selectEverydayItem('clip_flex')">
+          <div>
+            <div class="item-top-row">
+              <span class="item-emoji">📎</span>
+              <span class="item-name">封口夾 / 活動卡扣</span>
+            </div>
+            <div class="item-example">零食封口夾、卡扣盒蓋、活動關節（需承受反覆彎折與扭轉）</div>
+          </div>
+          <span class="item-pill">PETG・螺旋體 15%・牆3圈</span>
+        </button>
+
+        <button type="button" class="item-card-btn" data-item="heavy_hook" onclick="selectEverydayItem('heavy_hook')">
+          <div>
+            <div class="item-top-row">
+              <span class="item-emoji">🪝</span>
+              <span class="item-name">承重掛鉤 / 結構支架</span>
+            </div>
+            <div class="item-example">耳機桌邊掛架、層板托架、鎖螺絲結構件（加厚4圈外牆抗彎）</div>
+          </div>
+          <span class="item-pill">PETG・螺旋體 20%・牆4圈厚外皮</span>
+        </button>
+
+        <button type="button" class="item-card-btn" data-item="car_outdoor" onclick="selectEverydayItem('car_outdoor')">
+          <div>
+            <div class="item-top-row">
+              <span class="item-emoji">☀️</span>
+              <span class="item-name">車內 / 戶外耐曬件</span>
+            </div>
+            <div class="item-example">汽車杯架、陽台花盆架（耐高溫防軟化＋直線填充平頂不刮噴頭）</div>
+          </div>
+          <span class="item-pill">PETG・直線 15%・牆3圈・頂層5層</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 模式 B：4 句大白話自訂問答 -->
+    <section class="card" id="panel-qa" style="display:none;">
+      <h2 class="section-title">🧭 回答 4 個大白話問題，系統自動幫你算出專屬參數：</h2>
+      <p class="section-subtitle">只要照著腦中物品的特徵點選，下方照抄面板與右側透視圖就會即時更新！</p>
+
+      <div class="qa-grid">
+        <!-- Q1 -->
+        <div class="qa-box">
+          <div class="qa-step-title"><span class="qa-step-badge">Q1 用途</span> 印出來之後，這東西拿來幹嘛？</div>
+          <div class="qa-options-2">
+            <button type="button" class="qa-btn" data-qa-use="statue" onclick="setQAAnswer('use', 'statue')">
+              <span class="qa-btn-title">👀 純觀賞擺件</span>
+              <span class="qa-btn-sub">放著好看、不受力</span>
+            </button>
+            <button type="button" class="qa-btn active" data-qa-use="box" onclick="setQAAnswer('use', 'box')">
+              <span class="qa-btn-title">📦 裝東西容器</span>
+              <span class="qa-btn-sub">收納盒、托盤、筆筒</span>
+            </button>
+            <button type="button" class="qa-btn" data-qa-use="flex" onclick="setQAAnswer('use', 'flex')">
+              <span class="qa-btn-title">🔄 常彎折卡扣</span>
+              <span class="qa-btn-sub">夾子、轉軸、活動件</span>
+            </button>
+            <button type="button" class="qa-btn" data-qa-use="strong" onclick="setQAAnswer('use', 'strong')">
+              <span class="qa-btn-title">💪 掛重物結構</span>
+              <span class="qa-btn-sub">掛鉤、支架、鎖螺絲</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="qa-box">
+          <div class="qa-step-title"><span class="qa-step-badge">Q2 屋頂形狀</span> 它最上面那一面長怎樣？</div>
+          <div class="qa-options-1">
+            <button type="button" class="qa-btn active" data-qa-shape="flat" onclick="setQAAnswer('shape', 'flat')">
+              <span class="qa-btn-title">📐 大面積平頂（像盒底、桌面一樣平平一大片）</span>
+              <span class="qa-btn-sub">最怕下方支撐太稀，屋頂塑膠跨距過大而下垂凹陷！</span>
+            </button>
+            <button type="button" class="qa-btn" data-qa-shape="curve" onclick="setQAAnswer('shape', 'curve')">
+              <span class="qa-btn-title">⛰️ 圓弧斜面（像公仔身體、圓頂一樣慢慢收攏）</span>
+              <span class="qa-btn-sub">有小範圍頂面，貼近外殼處需要分叉支撐</span>
+            </button>
+            <button type="button" class="qa-btn" data-qa-shape="sharp" onclick="setQAAnswer('shape', 'sharp')">
+              <span class="qa-btn-title">🗼 尖頂無平面（像金字塔、尖塔一樣往上收尖）</span>
+              <span class="qa-btn-sub">本身斜牆就能互撐，大件可用閃電填充極致省料</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="qa-box">
+          <div class="qa-step-title"><span class="qa-step-badge">Q3 尺寸大小</span> 跟拳頭比起來大概多大？</div>
+          <div class="qa-options-1">
+            <button type="button" class="qa-btn active" data-qa-size="large" onclick="setQAAnswer('size', 'large')">
+              <span class="qa-btn-title">🐘 比拳頭大（中大型模型 &gt; 8 公分）</span>
+              <span class="qa-btn-sub">內部空間大，選對填充圖案可省下 30 分鐘與大量耗材</span>
+            </button>
+            <button type="button" class="qa-btn" data-qa-size="small" onclick="setQAAnswer('size', 'small')">
+              <span class="qa-btn-title">🐁 比雞蛋小 或 薄壁零件（&lt; 5 公分）</span>
+              <span class="qa-btn-sub">小件換圖案只差 1 分鐘，強制鎖定均勻支撐防踩空變軟</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="qa-box">
+          <div class="qa-step-title"><span class="qa-step-badge">Q4 使用環境</span> 會放在哪裡用？（自動幫你挑線材）</div>
+          <div class="qa-options-1">
+            <button type="button" class="qa-btn active" data-qa-env="indoor" onclick="setQAAnswer('env', 'indoor')">
+              <span class="qa-btn-title">🏠 室內一般常溫使用 ➔ 自動配【🟢 PLA 線材】</span>
+              <span class="qa-btn-sub">新手最好印、表面最漂亮、完全不挑圖案</span>
+            </button>
+            <button type="button" class="qa-btn" data-qa-env="outdoor" onclick="setQAAnswer('env', 'outdoor')">
+              <span class="qa-btn-title">☀️ 戶外/車內耐曬 或 要耐操韌性 ➔ 自動配【🟠 PETG 線材】</span>
+              <span class="qa-btn-sub">系統將自動禁用「網格」，防止 PETG 在十字交叉點結瘤刮噴頭</span>
+            </button>
+            <button type="button" class="qa-btn" data-qa-env="soft" onclick="setQAAnswer('env', 'soft')">
+              <span class="qa-btn-title">🧽 要像橡膠軟Q防摔 ➔ 自動配【🟣 TPU 彈性線】</span>
+              <span class="qa-btn-sub">系統將自動配「螺旋體」，確保三軸方向按壓回彈均勻</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 主體雙欄：SECTION 2 電腦切片軟體 1:1 傻瓜照抄面板 + SECTION 3 雙視角真實物理透視圖 -->
+    <div class="result-workspace">
+
+      <!-- SECTION 2: 1:1 傻瓜照抄面板 -->
+      <section class="cheat-sheet-card" id="sec-cheat">
+        <div class="cheat-header">
+          <div>
+            <div style="font-size:11.5px;opacity:0.9;">STEP 2・打開切片軟體 (Bambu Studio) 直接照填</div>
+            <div class="cheat-header-title" id="selected-item-banner">📋 【🍱 桌面收納盒 / 平底盤】照抄參數單</div>
+          </div>
+          <button type="button" class="copy-btn" id="copy-btn" onclick="copyBeginnerSheet()">📋 複製設定單到記事本</button>
+        </div>
+
+        <div class="slicer-path-banner">
+          📍 <strong>軟體位置：</strong>左側切換至 <strong>【強度 (Strength)】</strong> 分頁 ➔ 將以下 4 個格子照填即可！
+        </div>
+
+        <div class="cheat-body">
+          <!-- 推薦線材 -->
+          <div class="filament-recommend-box">
+            <div>
+              <div style="font-size:12px;color:#475569;font-weight:800;">🛒 推薦裝入的塑膠線材：</div>
+              <div style="font-size:12px;color:#334155;margin-top:2px;" id="filament-reason-text">室內常溫最穩定、搭橋平整度最佳、新手零失敗率</div>
+            </div>
+            <span class="filament-badge fil-pla" id="out-filament-badge">🟢 PLA / PLA+ 線材</span>
+          </div>
+
+          <!-- 格子 1：牆圈數 -->
+          <div class="slicer-row">
+            <div class="slicer-row-top">
+              <span class="slicer-software-label">① 牆圈數 (Wall loops)</span>
+              <span class="slicer-input-mock highlight-orange" id="out-walls">2 圈</span>
+            </div>
+            <div class="plain-talk-explain" id="explain-walls">
+              💬 <strong>白話文＝「外皮厚度（決定抗彎強度）」：</strong>看右邊剖面圖兩側的<strong>橘色垂直外牆</strong>！要堅固請加厚到 3~4 圈，別狂拉填充。
+            </div>
+          </div>
+
+          <!-- 格子 2：頂部殼體層數 -->
+          <div class="slicer-row">
+            <div class="slicer-row-top">
+              <span class="slicer-software-label">② 頂部殼體層數 (Top shell layers)</span>
+              <span class="slicer-input-mock highlight-blue" id="out-top-layers">5 層</span>
+            </div>
+            <div class="plain-talk-explain" id="explain-top">
+              💬 <strong>白話文＝「屋頂鋪幾層」：</strong>看右邊剖面圖最上方的<strong>藍色水平屋頂層</strong>！大平頂建議鋪 5 層，表面更平滑不見底。
+            </div>
+          </div>
+
+          <!-- 格子 3：稀疏填充密度 -->
+          <div class="slicer-row">
+            <div class="slicer-row-top">
+              <span class="slicer-software-label">③ 稀疏填充密度 (Sparse infill density)</span>
+              <span class="slicer-input-mock highlight-blue" id="out-density">10 %</span>
+            </div>
+            <div class="plain-talk-explain" id="explain-density">
+              💬 <strong>白話文＝「肚子裡紅色支架有多密」：</strong>一般設 8%~20% 即可，重點是讓屋頂下的<strong>🟢綠色支撐點</strong>夠密、不讓屋頂下垂。
+            </div>
+          </div>
+
+          <!-- 格子 4：稀疏填充圖案 -->
+          <div class="slicer-row">
+            <div class="slicer-row-top">
+              <span class="slicer-software-label">④ 稀疏填充圖案 (Sparse infill pattern)</span>
+              <span class="slicer-input-mock highlight-green" id="out-pattern">🕸️ 網格 (Grid)</span>
+            </div>
+            <div class="plain-talk-explain" id="explain-pattern">
+              💬 <strong>白話文＝「肚子裡紅色支架的排法」：</strong>網格垂直支撐點均勻密集，PLA 印平底盒最穩固！
+            </div>
+          </div>
+
+          <!-- 即時防翻車診斷橫幅 -->
+          <div id="radar-container"></div>
+
+          <!-- 折疊箱專屬「對象 Objects 分件設定」教學盒 -->
+          <div class="combo-secret-box" id="combo-secret-box">
+            <div class="combo-secret-title">
+              <span>💡 組合件進階神技：在軟體裡把「底板」跟「側板」分開設定！</span>
+              <span style="background:#2563eb;color:#fff;padding:2px 8px;border-radius:6px;font-size:11px;" id="combo-tag">折疊箱必看</span>
+            </div>
+            <div class="combo-step">
+              <strong>STEP 1：</strong>在切片軟體左側參數欄上方，把「全局 (Global)」切換為 <strong>【對象 (Objects)】</strong>。
+            </div>
+            <div class="combo-step">
+              <strong>STEP 2（救平底板）：</strong>點選「底板零件」，將填充圖案單獨設為 <strong>【網格 10% (PLA) 或 直線 12% (PETG)】</strong> ➔ 綠點密集托住屋頂不塌陷！
+            </div>
+            <div class="combo-step" style="margin-bottom:0;">
+              <strong>STEP 3（救活動側板）：</strong>點選四周「側板零件」，將填充設為 <strong>【螺旋體 (Gyroid) 12%~15%】</strong> ➔ 三向抗扭轉、反覆開合不斷裂！
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: 重新設計的 100% 真實物理幾何雙 SVG 圖解 -->
+      <section class="card" id="sec-xray" style="margin-bottom:0;">
+        <h2 class="section-title">🔍 真實物理剖面圖解：外牆、內部支撐與屋頂的關係</h2>
+        <p class="section-subtitle">已採用精準幾何邊界裁切，清楚呈現「每一圈橘色外牆、🟢屋頂支撐接觸點、🔵多層藍色屋頂與下垂塌陷物理現象」！</p>
+
+        <div class="xray-grid">
+
+          <!-- 圖解 1：XY 俯視切片圖 (Top-Down View) -->
+          <div class="xray-box">
+            <div class="xray-header">
+              <span>① 【XY 俯視切片圖】把肚子橫切開往下看（噴頭走線）</span>
+              <span id="xy-status-badge" style="color:#15803d;">✅ 支撐均勻</span>
+            </div>
+            <div class="xray-svg-wrap">
+              <svg id="svg-xy" class="cartoon-svg" viewBox="0 0 360 225" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <!-- 動態裁切區：確保內部紅色填充線條 100% 鎖在最內圈橘色牆內，絕不超出外牆 -->
+                  <clipPath id="xy-inner-clip">
+                    <rect id="xy-clip-rect" x="34" y="26" width="292" height="173" rx="6" />
+                  </clipPath>
+                </defs>
+                <rect x="0" y="0" width="360" height="225" fill="#f8fafc" />
+                <!-- 橘色外牆圈數 (2~6圈) -->
+                <g id="xy-walls"></g>
+                <!-- 裁切後的內部填充走線 -->
+                <g id="xy-infill" clip-path="url(#xy-inner-clip)" stroke="#dc2626" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></g>
+                <!-- 交叉點紅點與文字標記 -->
+                <g id="xy-markers"></g>
+              </svg>
+            </div>
+            <div class="layer-flip-bar">
+              <span style="font-size:12px;font-weight:800;color:#1e3a8a;" id="layer-indicator-text">
+                👀 目前預覽：奇數層 (第 15 層) 走線
+              </span>
+              <button type="button" class="layer-flip-btn" onclick="toggleLayerPreview()">
+                🔄 切換奇數層 (第15層) / 偶數層 (第16層)
+              </button>
+            </div>
+            <div class="xray-caption" id="xy-caption">
+              外圍橘色框代表「牆圈數」，內部紅線代表「稀疏填充走線」。
+            </div>
+          </div>
+
+          <!-- 圖解 2：Z 軸側面剖面圖 (Side Cross-Section: 屋頂、外牆與內部支架真實物理關係圖) -->
+          <div class="xray-box">
+            <div class="xray-header">
+              <span>② 【Z 軸側面剖面圖】垂直切開看「支架怎麼撐住屋頂」</span>
+              <span id="z-status-badge" style="color:#15803d;">✅ 屋頂平整無塌陷</span>
+            </div>
+            <div class="xray-svg-wrap">
+              <svg id="svg-z" class="cartoon-svg" viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <!-- 動態側面空腔裁切區：確保側面支撐線條精準落在 (inLeft ~ inRight, y=70 ~ y=190) 內 -->
+                  <clipPath id="z-inner-clip">
+                    <rect id="z-clip-rect" x="50" y="70" width="260" height="120" />
+                  </clipPath>
+                </defs>
+                <rect x="0" y="0" width="360" height="240" fill="#f8fafc" />
+
+                <!-- 印表機熱床平台 (Print Bed y=202~214) -->
+                <rect x="16" y="202" width="328" height="11" rx="3" fill="#334155" />
+                <line x1="20" y1="202" x2="340" y2="202" stroke="#94a3b8" stroke-width="2" />
+                <text x="180" y="227" text-anchor="middle" font-size="11" fill="#334155" font-weight="bold">🖨️ 印表機熱床底板 (Print Bed) ＋ 底部實心層</text>
+
+                <!-- 頂部移動噴嘴示意 -->
+                <g id="z-nozzle"></g>
+
+                <!-- 左右垂直橘色外牆 (隨牆圈數 2~6 圈變厚) + 底部橘色實心層 (y=190~202) -->
+                <g id="z-walls"></g>
+
+                <!-- 內部空腔紅色支撐骨架 (從底部 y=190 往上長到屋頂底面 y=70) -->
+                <g id="z-pillars" clip-path="url(#z-inner-clip)"></g>
+
+                <!-- 多層藍色屋頂 (Top shell layers, 位於 y=52 ~ y=70) -->
+                <g id="z-roof"></g>
+
+                <!-- 屋頂底面 y=70 的綠色支撐接觸點 (🟢) 與塌陷凹洞警示標記 -->
+                <g id="z-annotations"></g>
+              </svg>
+            </div>
+            <!-- 側面圖清晰圖例說明列 -->
+            <div class="xray-legend-row">
+              <span><i class="legend-dot" style="background:#ea580c;"></i>橘色：外皮牆圈與底層</span>
+              <span><i class="legend-dot" style="background:#dc2626;"></i>紅線：內部支撐骨架</span>
+              <span><i class="legend-dot" style="background:#16a34a;"></i>綠點：托住屋頂接觸點</span>
+              <span><i class="legend-dot" style="background:#0284c7;"></i>藍線：多層屋頂</span>
+            </div>
+            <div class="xray-caption" id="z-caption">
+              請觀察屋頂下方的「🟢綠色支撐點」：綠點越密集，上方藍色屋頂就越平整；綠點隔太遠，屋頂第一層就會往下垂墜凹陷！
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+    <!-- SECTION 4: 🕹️ 手動微調實驗室 -->
+    <section class="card" id="sec-sandbox" style="margin-top:14px;">
+      <h2 class="section-title">🕹️ 自由微調實驗室：親手拉動滑桿，觀察「外牆厚度、支撐綠點、屋頂塌陷」的變化</h2>
+      <p class="section-subtitle">想試試看不同填充圖案或密度嗎？直接點擊下方按鈕或拉動滑桿，上方透視圖與防翻車警報會即時連動！</p>
+
+      <div class="sandbox-controls">
+        <div>
+          <div style="font-size:13px;font-weight:900;margin-bottom:6px;color:#0f172a;">
+            🎨 切換「稀疏填充圖案 (Sparse infill pattern)」：
+          </div>
+          <div class="pattern-pill-grid">
+            <button type="button" class="pat-pill" data-pat="adaptive" onclick="manualChangePattern('adaptive')">🎯 自適應立方體<br/><span style="font-size:10px;opacity:0.85;">(下空上密省料王)</span></button>
+            <button type="button" class="pat-pill active" data-pat="grid" onclick="manualChangePattern('grid')">🕸️ 網格 (Grid)<br/><span style="font-size:10px;opacity:0.85;">(PLA平底防塌王)</span></button>
+            <button type="button" class="pat-pill" data-pat="line" onclick="manualChangePattern('line')">📏 直線 (Line)<br/><span style="font-size:10px;opacity:0.85;">(PETG平頂零交叉)</span></button>
+            <button type="button" class="pat-pill" data-pat="gyroid" onclick="manualChangePattern('gyroid')">🌀 螺旋體<br/><span style="font-size:10px;opacity:0.85;">(抗扭耐折零交叉)</span></button>
+            <button type="button" class="pat-pill" data-pat="cubic" onclick="manualChangePattern('cubic')">🧊 立方體<br/><span style="font-size:10px;opacity:0.85;">(3D斜撐高剛性)</span></button>
+            <button type="button" class="pat-pill" data-pat="lightning" onclick="manualChangePattern('lightning')">⚡ 閃電<br/><span style="font-size:10px;opacity:0.85;">(尖頂靠牆長樹枝)</span></button>
+            <button type="button" class="pat-pill pat-bad" data-pat="honeycomb" onclick="manualChangePattern('honeycomb')">🐝 蜂窩/3D蜂窩<br/><span style="font-size:10px;">(⚠️多耗25%料/慢)</span></button>
+            <button type="button" class="pat-pill pat-bad" data-pat="crosshatch" onclick="manualChangePattern('crosshatch')">🐢 交叉層疊<br/><span style="font-size:10px;">(⚠️耗時耗料雙輸)</span></button>
+          </div>
+
+          <div style="font-size:13px;font-weight:900;margin:10px 0 6px 0;color:#0f172a;">
+            🧪 切換「塑膠線材種類」：
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+            <button type="button" class="pat-pill active" data-fil="pla" onclick="manualChangeFilament('pla')">🟢 PLA 好印線</button>
+            <button type="button" class="pat-pill" data-fil="petg" onclick="manualChangeFilament('petg')">🟠 PETG 耐曬韌性線</button>
+            <button type="button" class="pat-pill" data-fil="tpu" onclick="manualChangeFilament('tpu')">🟣 TPU 軟Q橡膠線</button>
+          </div>
+        </div>
+
+        <div>
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span>① 牆圈數 (Wall loops 外皮厚度：2~6 圈)</span>
+              <span id="lbl-walls" style="color:#ea580c;">2 圈</span>
+            </div>
+            <div class="slider-flex">
+              <button type="button" class="pm-btn" onclick="stepVal('walls', -1)">−</button>
+              <input type="range" id="rng-walls" min="2" max="6" step="1" value="2" oninput="onManualSlider()" />
+              <button type="button" class="pm-btn" onclick="stepVal('walls', 1)">+</button>
+            </div>
+          </div>
+
+          <div class="slider-group" style="margin-bottom:0;">
+            <div class="slider-label-row">
+              <span>② 稀疏填充密度 (Density 肚子支架疏密：5%~50%)</span>
+              <span id="lbl-density" style="color:#0284c7;">10 %</span>
+            </div>
+            <div class="slider-flex">
+              <button type="button" class="pm-btn" onclick="stepVal('density', -5)">−</button>
+              <input type="range" id="rng-density" min="5" max="50" step="5" value="10" oninput="onManualSlider()" />
+              <button type="button" class="pm-btn" onclick="stepVal('density', 5)">+</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- 手機底部常駐 4 合 1 導覽列 -->
+  <nav class="mobile-sticky-nav">
+    <a href="#sec-choose" class="mob-nav-link">🎯<span>挑物品</span></a>
+    <a href="#sec-cheat" class="mob-nav-link">📋<span>照抄單</span></a>
+    <a href="#sec-xray" class="mob-nav-link">🔍<span>剖面圖</span></a>
+    <a href="#sec-sandbox" class="mob-nav-link">🕹️<span>手動微調</span></a>
+  </nav>
+
+  <script src="js/config.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/visualizer.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
